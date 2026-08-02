@@ -1,0 +1,22 @@
+---
+layout: base.njk
+pageTitle: field notes
+pageDescription: "Notes from life in Phulbani, Odisha: medicine, gardening, travel, and everything in between."
+permalink: /field-notes/
+---
+<h1>field notes</h1>
+<p class="lede">Whatever the days bring: the wards, the garden, the road. Mostly the wards.</p>
+
+{% set notes = collections.notes | reverse %}
+{% if notes.length %}
+<ul class="notes-list">
+  {% for note in notes %}
+  <li>
+    <time datetime="{{ note.date | date }}">{{ note.date | date }}</time>
+    <a href="{{ note.url }}">{{ note.data.title }}</a>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="notes-empty">The notebook is still blank.</p>
+{% endif %}

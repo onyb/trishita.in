@@ -1,0 +1,24 @@
+---
+layout: base.njk
+pageTitle: postcards
+pageDescription: "Photographs by Trishita: gardens, hills, and the road."
+permalink: /postcards/
+pageClass: photos
+---
+<h1>postcards</h1>
+<p class="lede">A few frames I'm fond of.</p>
+
+{% if photos.length %}
+<div class="gallery">
+  {% for photo in photos %}
+  <figure class="gallery-item">
+    <a href="{{ photo.url }}">
+      <img src="{{ photo.url }}" alt="{{ photo.caption or 'photograph' }}" loading="lazy" decoding="async">
+    </a>
+    {% if photo.caption %}<figcaption>{{ photo.caption }}</figcaption>{% endif %}
+  </figure>
+  {% endfor %}
+</div>
+{% else %}
+<p class="gallery-empty">No postcards yet. The first ones are in the mail.</p>
+{% endif %}

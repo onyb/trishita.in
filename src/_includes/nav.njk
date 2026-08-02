@@ -1,0 +1,6 @@
+<nav class="site-nav">
+  {% set current = page.url %}
+  {% if current == "/" %}<span class="current">home</span>{% else %}<a href="/">home</a>{% endif %}
+  {% if current == "/postcards/" %}<span class="current">postcards</span>{% else %}<a href="/postcards/">postcards</a>{% endif %}
+  {% if current and current.startsWith("/field-notes/") %}<span class="current">field notes</span>{% else %}<a href="/field-notes/">field notes</a>{% endif %}
+</nav>

@@ -1,0 +1,34 @@
+{%- set metaTitle = (site.title + " - " + (pageTitle | titleCap)) if pageTitle else site.title -%}
+{%- set metaDesc = pageDescription or site.description -%}
+{%- set metaUrl = site.url + page.url -%}
+{%- set metaType = pageType or "website" -%}
+
+<title>{{ metaTitle }}</title>
+<meta name="description" content="{{ metaDesc }}">
+
+{% if page.url and page.url != "/404.html" %}<link rel="canonical" href="{{ metaUrl }}">{% endif %}
+
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta name="theme-color" content="#fdf7f4">
+
+<meta property="og:type" content="{{ metaType }}">
+<meta property="og:title" content="{{ metaTitle }}">
+<meta property="og:description" content="{{ metaDesc }}">
+<meta property="og:url" content="{{ metaUrl }}">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:locale" content="en_IN">
+
+{% if jsonLdPerson %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "@id": "{{ site.url }}/#person",
+  "name": {{ site.person.name | dump | safe }},
+  "url": "{{ site.url }}/",
+  "jobTitle": {{ site.person.jobTitle | dump | safe }},
+  "description": {{ site.person.description | dump | safe }},
+  "knowsAbout": {{ site.person.knowsAbout | dump | safe }}
+}
+</script>
+{% endif %}

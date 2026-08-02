@@ -1,0 +1,15 @@
+{
+  "name": "trishita-in",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "trishita.in — static site, hand-rolled with 11ty.",
+  "scripts": {
+    "build": "eleventy",
+    "dev": "eleventy --serve --quiet",
+    "clean": "rm -rf _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0"
+  }
+}

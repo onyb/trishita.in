@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include "head-meta.njk" %}
+  {# Inlined to avoid a render-blocking request — GH Pages' 10-min cache TTL
+     makes a separate stylesheet not worth the extra round trip. #}
+  <style>{% include "css/main.css" %}</style>
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem("theme") === "dark") {
+          document.documentElement.setAttribute("data-theme", "dark");
+        }
+      } catch (e) {}
+    })();
+  </script>
+</head>
+<body{% if pageClass %} class="{{ pageClass }}"{% endif %}>
+  <!--
+    hi, hacker. source is at https://github.com/onyb/trishita.in
+    no trackers, no analytics, no cookies. just html.
+  -->
+  <div class="petals" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span><span></span><span class="flower"></span><span class="flower"></span>
+  </div>
+  <main>
+    {% include "nav.njk" %}
+    {{ content | safe }}
+    <footer class="site-footer">
+      <span class="seal" aria-hidden="true" title="hana — flower">花</span>
+      <button class="theme-toggle" type="button" id="theme-toggle" aria-label="Toggle dark mode">theme</button>
+    </footer>
+  </main>
+  <script>
+    (function () {
+      var btn = document.getElementById("theme-toggle");
+      if (!btn) return;
+      var html = document.documentElement;
+      var setLabel = function () {
+        btn.textContent = html.getAttribute("data-theme") === "dark" ? "☀ light" : "☾ dark";
+      };
+      setLabel();
+      btn.addEventListener("click", function () {
+        var isDark = html.getAttribute("data-theme") === "dark";
+        if (isDark) {
+          html.removeAttribute("data-theme");
+          try { localStorage.setItem("theme", "light"); } catch (e) {}
+        } else {
+          html.setAttribute("data-theme", "dark");
+          try { localStorage.setItem("theme", "dark"); } catch (e) {}
+        }
+        setLabel();
+      });
+    })();
+  </script>
+</body>
+</html>

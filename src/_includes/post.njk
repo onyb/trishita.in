@@ -1,0 +1,9 @@
+---
+layout: base.njk
+---
+<article class="post">
+  <h1>{{ title }}</h1>
+  <p class="post-meta"><time datetime="{{ page.date | date }}">{{ page.date | date }}</time>{% if location %} · {{ location }}{% endif %}</p>
+  {{ content | safe }}
+</article>
+<p><a href="/field-notes/">← field notes</a></p>
